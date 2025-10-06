@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PlaylistCheckAI</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>PlaylistCheckAI</h1>
+    <p class="subtitle">Paste your Spotify playlist link or search for one below.</p>
+
+    <!-- Playlist link analysis -->
+    <input type="text" id="playlistInput" placeholder="Paste Spotify playlist link here">
+    <button onclick="analyzePlaylist()">Analyze Playlist</button>
+
+    <div id="result">Your rating will appear here</div>
+
+    <hr>
+
+    <!-- Playlist search -->
+    <h2>🔍 Search Spotify Playlists</h2>
+    <input type="text" id="searchInput" placeholder="Search by keyword (mock)">
+    <button onclick="searchPlaylists()">Search</button>
+
+    <ul id="searchResults"></ul>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
