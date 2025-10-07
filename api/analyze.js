@@ -30,12 +30,16 @@ export default async function handler(req, res) {
     }
 
     // Fetch playlist data from Spotify
-    const playlistResponse = await fetch(
-      `https://api.spotify.com/v1/playlists/${playlistId}`,
-      {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      }
-    );
+  const playlistResponse = await fetch(
+  `https://api.spotify.com/v1/playlists/${playlistId}`,
+  {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      Accept: "application/json",
+    },
+  }
+);
+
     const playlistData = await playlistResponse.json();
 
     if (!playlistData.tracks) {
