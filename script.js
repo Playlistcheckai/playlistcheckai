@@ -1,62 +1,45 @@
-function analyzePlaylist() {
-  const input = document.getElementById("playlistInput").value;
-  const resultDiv = document.getElementById("result");
+document.getElementById("analyzeBtn").addEventListener("click", analyzePlaylist);
 
-  if (!input) {
-    resultDiv.innerText = "⚠️ Please enter a Spotify playlist link.";
-    resultDiv.style.color = "yellow";
+async function analyzePlaylist() {
+  const playlistUrl = document.getElementById("playlistInput").value.trim();
+  const resultsSection = document.getElementById("results");
+  const ratingText = document.getElementById("ratingText");
+  const circle = document.getElementById("circle");
+  const label = document.getElementById("ratingLabel");
+
+  if (!playlistUrl) {
+    alert("⚠️ Please enter a Spotify playlist link.");
     return;
   }
 
-  // Mock AI logic for MVP
-  const randomScore = Math.floor(Math.random() * 91) + 10; // 10–100
-  let label = "";
-  let color = "";
+  resultsSection.classList.remove("hidden");
+  label.textContent = "Analyzing...";
+  ratingText.textContent = "--";
+  circle.style.strokeDasharray = "0, 100";
 
-  if (randomScore <= 40) {
-    label = "Risky";
-    color = "red";
-  } else if (randomScore <= 59) {
-    label = "Good";
-    color = "yellow";
-  } else {
-    label = "Excellent";
-    color = "#1DB954"; // Spotify green
-  }
+  try {
+    const response = await fetch(`/api/analyze?playlistUrl=${encodeURIComponent(playlistUrl)}`);
+    const data = await response.json();
 
-  resultDiv.innerText = `Rating: ${randomScore} (${label})`;
-  resultDiv.style.color = color;
-}
+    let score = data.score || Math.floor(Math.random() * 90) + 10; // fallback mock
+    let labelText =
+      score < 41 ? "Risky" : score < 60 ? "Good" : "Excellent";
 
-// Mock playlist search
-function searchPlaylists() {
-  const query = document.getElementById("searchInput").value.trim();
-  const resultsList = document.getElementById("searchResults");
-  resultsList.innerHTML = "";
+    // Animate circular gauge
+    let offset = score;
+    circle.style.transition = "stroke-dasharray 1.2s ease-out";
+    circle.style.strokeDasharray = `${offset}, 100`;
+    ratingText.textContent = score;
+    label.textContent = `${labelText} (${score}/100)`;
 
-  if (!query) {
-    resultsList.innerHTML = "<li>⚠️ Please enter a keyword.</li>";
-    return;
-  }
-
-  // Mock data (later this will call Spotify API)
-  const mockPlaylists = [
-    { name: "Top Hits 2025", url: "https://open.spotify.com/playlist/111" },
-    { name: "Chill Vibes", url: "https://open.spotify.com/playlist/222" },
-    { name: "Workout Energy", url: "https://open.spotify.com/playlist/333" }
-  ];
-
-  const filtered = mockPlaylists.filter(p => 
-    p.name.toLowerCase().includes(query.toLowerCase())
-  );
-
-  if (filtered.length === 0) {
-    resultsList.innerHTML = "<li>No playlists found.</li>";
-  } else {
-    filtered.forEach(p => {
-      const li = document.createElement("li");
-      li.innerHTML = `<strong>${p.name}</strong><br><a href="${p.url}" target="_blank">${p.url}</a>`;
-      resultsList.appendChild(li);
-    });
+    // Update mock playlist info (replace with real Spotify API later)
+    document.getElementById("playlistTitle").textContent = "Analyzed Playlist";
+    document.getElementById("playlistDescription").textContent =
+      "Public playlist information displayed here.";
+    document.getElementById("coverImage").src =
+      "https://storage.googleapis.com/pai-images/playlistcoverexample.png";
+  } catch (error) {
+    label.textContent = "Error fetching playlist data.";
+    console.error(error);
   }
 }
