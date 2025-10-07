@@ -24,7 +24,9 @@ export default async function handler(req, res) {
     const accessToken = authData.access_token;
 
     // Extract playlist ID from URL
-    const playlistId = playlistUrl.split("/playlist/")[1]?.split("?")[0];
+    const match = playlistUrl.match(/playlist\/([a-zA-Z0-9]+)/);
+const playlistId = match ? match[1] : null;
+
     if (!playlistId) {
       return res.status(400).json({ error: "Invalid Spotify playlist link" });
     }
