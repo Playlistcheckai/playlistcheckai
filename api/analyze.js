@@ -1,82 +1,78 @@
 export default async function handler(req, res) {
   try {
-    const { playlistUrl } = req.query;
+    const { playlistText } = req.body;
 
-    if (!playlistUrl) {
-      return res.status(400).json({ error: "Missing playlist URL" });
+    if (!playlistText || playlistText.trim().length === 0) {
+      return res.status(400).json({ error: "No playlist text provided." });
     }
 
-    // Get Spotify access token
-    const authResponse = await fetch("https://accounts.spotify.com/api/token", {
-      method: "POST",
-      headers: {
-        Authorization:
-          "Basic " +
-          Buffer.from(
-            process.env.SPOTIFY_CLIENT_ID + ":" + process.env.SPOTIFY_CLIENT_SECRET
-          ).toString("base64"),
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: "grant_type=client_credentials",
-    });
+    // 🔹 Define the two models we’ll use
+    const models = {
+      sentiment: "cardiffnlp/twitter-roberta-base-sentiment",
+      toxicity: "unitary/toxic-bert",
+    };
 
-    const authData = await authResponse.json();
-    const accessToken = authData.access_token;
+    // 🔹 Helper function to call a Hugging Face model
+    async function callHFModel(model, inputs) {
+      const response = await fetch(`https://api-inference.huggingface.co/models/${model}`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${process.env.HUGGINGFACE_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ inputs }),
+      });
 
-    // Extract playlist ID from URL
-    const match = playlistUrl.match(/playlist\/([a-zA-Z0-9]+)/);
-const playlistId = match ? match[1] : null;
+      if (!response.ok) {
+        const err = await response.text();
+        console.error(`Error from ${model}:`, err);
+        return null;
+      }
 
-    if (!playlistId) {
-      return res.status(400).json({ error: "Invalid Spotify playlist link" });
+      return response.json();
     }
 
-    // Fetch playlist data from Spotify
-  const playlistResponse = await fetch(
-  `https://api.spotify.com/v1/playlists/${playlistId}`,
-  {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      Accept: "application/json",
-    },
-  }
-);
+    // 🔹 Run both models in parallel
+    const [sentimentData, toxicityData] = await Promise.all([
+      callHFModel(models.sentiment, playlistText),
+      callHFModel(models.toxicity, playlistText),
+    ]);
 
-    const playlistData = await playlistResponse.json();
+    // 🔹 Interpret Sentiment Result
+    const sentimentLabel = sentimentData?.[0]?.[0]?.label || "neutral";
+    const sentimentScore = sentimentData?.[0]?.[0]?.score || 0.5;
 
-if (!playlistData.tracks) {
-  console.error("Spotify raw response:", playlistData);
-  return res.status(400).json({
-    error: "Could not fetch playlist tracks",
-    spotifyResponse: playlistData,
-  });
-}
+    // 🔹 Interpret Toxicity Result
+    const toxicityScore = toxicityData?.[0]?.[0]?.score || 0; // 0 = safe, 1 = toxic
 
+    // 🔹 Combine both for AI Rating
+    // The lower the toxicity and higher the sentiment, the safer the playlist.
+    const aiSafetyIndex = Math.round((sentimentScore * (1 - toxicityScore)) * 100);
 
-    // Analyze explicit content
-    const tracks = playlistData.tracks.items.map((item) => ({
-      name: item.track.name,
-      explicit: item.track.explicit,
-    }));
+    let category = "Good";
+    let color = "yellow";
 
-    const explicitCount = tracks.filter((t) => t.explicit).length;
-    const explicitScore = Math.max(0, 100 - explicitCount * 5);
-
-    // Simple rating logic
-    const score = explicitScore;
-    let label = "Excellent";
-    if (score <= 40) label = "Risky";
-    else if (score <= 59) label = "Good";
+    if (aiSafetyIndex < 40) {
+      category = "Risky";
+      color = "red";
+    } else if (aiSafetyIndex >= 60) {
+      category = "Excellent";
+      color = "green";
+    }
 
     res.status(200).json({
-      playlist: playlistData.name,
-      totalTracks: tracks.length,
-      explicitCount,
-      score,
-      label,
+      rating: aiSafetyIndex,
+      category,
+      sentiment: sentimentLabel,
+      sentimentScore,
+      toxicityScore,
+      color,
     });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Server error: " + err.message });
+  } catch (error) {
+    console.error("AI analysis failed:", error);
+    res.status(500).json({
+      error: "AI analysis failed",
+      details: error.message,
+    });
   }
 }
