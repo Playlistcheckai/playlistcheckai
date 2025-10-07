@@ -42,9 +42,14 @@ export default async function handler(req, res) {
 
     const playlistData = await playlistResponse.json();
 
-    if (!playlistData.tracks) {
-      return res.status(400).json({ error: "Could not fetch playlist tracks" });
-    }
+if (!playlistData.tracks) {
+  console.error("Spotify raw response:", playlistData);
+  return res.status(400).json({
+    error: "Could not fetch playlist tracks",
+    spotifyResponse: playlistData,
+  });
+}
+
 
     // Analyze explicit content
     const tracks = playlistData.tracks.items.map((item) => ({
