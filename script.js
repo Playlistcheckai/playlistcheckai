@@ -1,5 +1,12 @@
 document.getElementById("analyzeBtn").addEventListener("click", analyzePlaylist);
 
+// Allow Enter key to trigger analysis
+document.getElementById("playlistInput").addEventListener("keypress", function(e) {
+  if (e.key === "Enter") {
+    analyzePlaylist();
+  }
+});
+
 async function analyzePlaylist() {
   const playlistUrl = document.getElementById("playlistInput").value.trim();
   const resultsSection = document.getElementById("results");
@@ -12,13 +19,26 @@ async function analyzePlaylist() {
     return;
   }
 
+  // Validate Spotify URL
+  if (!playlistUrl.includes('open.spotify.com/playlist/')) {
+    alert("❌ Please enter a valid Spotify playlist URL");
+    return;
+  }
+
+  // Show loading state
   resultsSection.classList.remove("hidden");
   label.textContent = "Analyzing...";
   ratingText.textContent = "--";
   circle.style.strokeDasharray = "0, 100";
+  
+  // Clear previous results
+  document.getElementById("coverImage").src = "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=300&fit=crop";
+  document.getElementById("playlistTitle").textContent = "Loading...";
+  document.getElementById("playlistDescription").textContent = "Fetching playlist data...";
+  document.getElementById("tracks").innerHTML = "<li>Analyzing playlist safety patterns...</li>";
 
   try {
-    // 🔹 Call your backend AI analysis with GET request
+    // Call backend AI analysis
     const response = await fetch(`/api/analyze?playlistUrl=${encodeURIComponent(playlistUrl)}`);
     const data = await response.json();
 
@@ -26,62 +46,43 @@ async function analyzePlaylist() {
       throw new Error(data.error || "Analysis failed");
     }
 
-    let score = data.score || 50;
-    let labelText = data.category || (score < 41 ? "Risky" : score < 60 ? "Good" : "Excellent");
+    const score = data.score || 50;
+    const category = data.category || (score < 40 ? "Risky" : score < 70 ? "Good" : "Excellent");
 
-    // 🔹 Animate gauge
-    let offset = score;
+    // Update gauge animation
     circle.style.transition = "stroke-dasharray 1.2s ease-out";
-    circle.style.strokeDasharray = `${offset}, 100`;
+    circle.style.strokeDasharray = `${score}, 100`;
     ratingText.textContent = score;
-    label.textContent = `${labelText} (${score}/100)`;
+    label.textContent = `${category} (${score}/100)`;
 
-    // 🔹 Update playlist info from API response
-    document.getElementById("coverImage").src = data.image || "https://via.placeholder.com/300?text=No+Cover";
-    document.getElementById("playlistTitle").textContent = data.title || "Unknown Playlist";
-    document.getElementById("playlistDescription").textContent = data.description || "AI analysis completed.";
+    // Update playlist info
+    document.getElementById("coverImage").src = data.image;
+    document.getElementById("playlistTitle").textContent = data.title;
+    document.getElementById("playlistDescription").textContent = data.description;
 
-    // 🔹 Display AI Analysis Summary
+    // Display AI Analysis Summary
     const tracksList = document.getElementById("tracks");
     if (data.analysisSummary) {
       tracksList.innerHTML = `<li>${data.analysisSummary}</li>`;
-    } else if (data.reason) {
-      tracksList.innerHTML = `<li>${data.reason}</li>`;
     } else {
-      tracksList.innerHTML = `<li>AI analysis completed. Safety rating: ${score}/100. This playlist has been evaluated for bot patterns and artificial engagement.</li>`;
+      tracksList.innerHTML = `<li>Safety analysis completed. This playlist rated ${score}/100 for organic engagement and authenticity.</li>`;
     }
 
   } catch (error) {
-    label.textContent = "Analysis failed - please try again";
+    console.error("Analysis error:", error);
+    
+    // Show error state
+    label.textContent = "Analysis Failed";
     ratingText.textContent = "ERR";
     
-    // Show error in analysis summary
+    // Provide helpful error message
     const tracksList = document.getElementById("tracks");
-    tracksList.innerHTML = `<li>Unable to complete analysis: ${error.message}. Please check the playlist URL and try again.</li>`;
+    tracksList.innerHTML = `<li>Unable to analyze playlist. Please ensure:
+      <br>• The playlist URL is correct
+      <br>• The playlist is public
+      <br>• Try again in a moment</li>`;
     
-    console.error("Analysis error:", error);
-  }
-}
-
-// 🧠 Fetch Open Graph metadata directly from public playlist pages (fallback)
-async function fetchPlaylistMeta(playlistUrl) {
-  try {
-    const apiUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(playlistUrl)}`;
-    const response = await fetch(apiUrl);
-    const data = await response.json();
-    const html = data.contents;
-
-    const titleMatch = html.match(/<meta property="og:title" content="([^"]+)"/);
-    const imageMatch = html.match(/<meta property="og:image" content="([^"]+)"/);
-    const descMatch = html.match(/<meta property="og:description" content="([^"]+)"/);
-
-    return {
-      title: titleMatch ? titleMatch[1] : "Untitled Playlist",
-      image: imageMatch ? imageMatch[1] : "https://via.placeholder.com/300?text=Playlist+Cover",
-      description: descMatch ? descMatch[1] : "No public description found."
-    };
-  } catch (err) {
-    console.error("Error fetching playlist meta:", err);
-    return null;
+    document.getElementById("playlistTitle").textContent = "Analysis Error";
+    document.getElementById("playlistDescription").textContent = "Please check the playlist URL and try again.";
   }
 }
