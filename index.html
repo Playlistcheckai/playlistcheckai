@@ -11,19 +11,51 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
-  <!-- AdSense Code -->
+  <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4186785765938871"
      crossorigin="anonymous"></script>
+
+  <!-- Google Consent Framework -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'analytics_storage': 'denied',
+      'personalization_storage': 'denied',
+      'functionality_storage': 'denied',
+      'security_storage': 'granted',
+      'wait_for_update': 500
+    });
+    
+    // Initialize adsbygoogle
+    window.adsbygoogle = window.adsbygoogle || [];
+  </script>
 
   <!-- Styles -->
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- GDPR Consent Banner -->
+  <div id="gdpr-consent-banner" class="gdpr-banner">
+    <div class="gdpr-content">
+      <div class="gdpr-text">
+        <h3>🍪 We Value Your Privacy</h3>
+        <p>We use cookies to personalize content and ads, provide social media features, and analyze our traffic. Click "Accept All" to consent to the use of all cookies.</p>
+      </div>
+      <div class="gdpr-buttons">
+        <button id="gdpr-manage-btn" class="gdpr-btn secondary">Manage Options</button>
+        <button id="gdpr-accept-btn" class="gdpr-btn primary">Accept All</button>
+      </div>
+    </div>
+  </div>
+
   <div class="layout-container">
     <!-- Left Sidebar Ad -->
     <aside class="sidebar-ad left-sidebar">
       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4186785765938871"
      crossorigin="anonymous"></script>
+      <!-- Sidebar Ad -->
       <ins class="adsbygoogle"
           style="display:block"
           data-ad-client="ca-pub-4186785765938871"
@@ -42,10 +74,11 @@
         <h1>PlaylistCheckAI</h1>
       </header>
 
-      <!-- Top Banner Ad (Mobile) -->
+      <!-- Mobile Top Ad -->
       <div class="mobile-ad">
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4186785765938871"
      crossorigin="anonymous"></script>
+        <!-- Mobile Banner -->
         <ins class="adsbygoogle"
             style="display:block"
             data-ad-client="ca-pub-4186785765938871"
@@ -66,7 +99,7 @@
 
       <section id="results" class="hidden">
         <div class="playlist-info">
-          <img id="coverImage" src="https://via.placeholder.com/200" alt="Playlist cover" />
+          <img id="coverImage" src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=300&fit=crop" alt="Playlist cover" />
           <div class="playlist-meta">
             <h3 id="playlistTitle">Playlist Title</h3>
             <p id="playlistDescription">Playlist description will appear here.</p>
@@ -95,6 +128,7 @@
         <div class="in-article-ad">
           <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4186785765938871"
      crossorigin="anonymous"></script>
+          <!-- In-Article Ad -->
           <ins class="adsbygoogle"
               style="display:block; text-align:center;"
               data-ad-layout="in-article"
@@ -142,7 +176,8 @@
               </ul>
               <a href="https://distrokid.com/vip/seven/click?campaign=playlistcheckai" 
                  target="_blank" 
-                 class="affiliate-button">
+                 class="affiliate-button"
+                 onclick="trackAffiliateClick('DistroKid')">
                 Start at $19.99/year ›
               </a>
             </div>
@@ -157,7 +192,8 @@
               </ul>
               <a href="https://www.tunecore.com/lp/signup_04?ref=playlistcheckai" 
                  target="_blank" 
-                 class="affiliate-button">
+                 class="affiliate-button"
+                 onclick="trackAffiliateClick('TuneCore')">
                 Try TuneCore ›
               </a>
             </div>
@@ -172,7 +208,8 @@
               </ul>
               <a href="https://www.cdbaby.com/?ref=playlistcheckai" 
                  target="_blank" 
-                 class="affiliate-button">
+                 class="affiliate-button"
+                 onclick="trackAffiliateClick('CDBaby')">
                 Learn More ›
               </a>
             </div>
@@ -186,6 +223,7 @@
       <div class="bottom-ad">
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4186785765938871"
      crossorigin="anonymous"></script>
+        <!-- Bottom Banner -->
         <ins class="adsbygoogle"
             style="display:block"
             data-ad-client="ca-pub-4186785765938871"
@@ -207,6 +245,7 @@
     <aside class="sidebar-ad right-sidebar">
       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4186785765938871"
      crossorigin="anonymous"></script>
+      <!-- Sidebar Ad -->
       <ins class="adsbygoogle"
           style="display:block"
           data-ad-client="ca-pub-4186785765938871"
@@ -219,6 +258,10 @@
     </aside>
   </div>
 
+  <!-- Include GDPR Consent Manager -->
+  <script src="gdpr-consent.js"></script>
+
+  <!-- Your existing script -->
   <script src="script.js"></script>
 </body>
 </html>
