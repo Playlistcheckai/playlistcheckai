@@ -18,7 +18,7 @@ async function analyzePlaylist() {
   circle.style.strokeDasharray = "0, 100";
 
   try {
-    // 🔹 Call your backend AI analysis
+    // 🔹 Call your backend AI analysis with GET request
     const response = await fetch(`/api/analyze?playlistUrl=${encodeURIComponent(playlistUrl)}`);
     const data = await response.json();
 
@@ -26,7 +26,7 @@ async function analyzePlaylist() {
       throw new Error(data.error || "Analysis failed");
     }
 
-    let score = data.score || Math.floor(Math.random() * 90) + 10;
+    let score = data.score || 50;
     let labelText = data.category || (score < 41 ? "Risky" : score < 60 ? "Good" : "Excellent");
 
     // 🔹 Animate gauge
@@ -57,13 +57,13 @@ async function analyzePlaylist() {
     
     // Show error in analysis summary
     const tracksList = document.getElementById("tracks");
-    tracksList.innerHTML = `<li>Unable to complete analysis. Please check the playlist URL and try again.</li>`;
+    tracksList.innerHTML = `<li>Unable to complete analysis: ${error.message}. Please check the playlist URL and try again.</li>`;
     
     console.error("Analysis error:", error);
   }
 }
 
-// 🧠 Fetch Open Graph metadata directly from public playlist pages
+// 🧠 Fetch Open Graph metadata directly from public playlist pages (fallback)
 async function fetchPlaylistMeta(playlistUrl) {
   try {
     const apiUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(playlistUrl)}`;
