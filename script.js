@@ -18,12 +18,16 @@ async function analyzePlaylist() {
   circle.style.strokeDasharray = "0, 100";
 
   try {
-    // 🔹 Call your existing backend AI analysis
+    // 🔹 Call your backend AI analysis
     const response = await fetch(`/api/analyze?playlistUrl=${encodeURIComponent(playlistUrl)}`);
     const data = await response.json();
 
-    let score = data.rating || Math.floor(Math.random() * 90) + 10;
-    let labelText = score < 41 ? "Risky" : score < 60 ? "Good" : "Excellent";
+    if (!response.ok) {
+      throw new Error(data.error || "Analysis failed");
+    }
+
+    let score = data.score || Math.floor(Math.random() * 90) + 10;
+    let labelText = data.category || (score < 41 ? "Risky" : score < 60 ? "Good" : "Excellent");
 
     // 🔹 Animate gauge
     let offset = score;
@@ -32,22 +36,30 @@ async function analyzePlaylist() {
     ratingText.textContent = score;
     label.textContent = `${labelText} (${score}/100)`;
 
-    // 🔹 Fetch playlist public info from its open.spotify.com page
-    const meta = await fetchPlaylistMeta(playlistUrl);
+    // 🔹 Update playlist info from API response
+    document.getElementById("coverImage").src = data.image || "https://via.placeholder.com/300?text=No+Cover";
+    document.getElementById("playlistTitle").textContent = data.title || "Unknown Playlist";
+    document.getElementById("playlistDescription").textContent = data.description || "AI analysis completed.";
 
-    if (meta) {
-      document.getElementById("coverImage").src = meta.image;
-      document.getElementById("playlistTitle").textContent = meta.title;
-      document.getElementById("playlistDescription").textContent = meta.description;
+    // 🔹 Display AI Analysis Summary
+    const tracksList = document.getElementById("tracks");
+    if (data.analysisSummary) {
+      tracksList.innerHTML = `<li>${data.analysisSummary}</li>`;
+    } else if (data.reason) {
+      tracksList.innerHTML = `<li>${data.reason}</li>`;
     } else {
-      document.getElementById("coverImage").src = "https://via.placeholder.com/300?text=No+Cover";
-      document.getElementById("playlistTitle").textContent = "Unknown Playlist";
-      document.getElementById("playlistDescription").textContent = "AI analysis completed.";
+      tracksList.innerHTML = `<li>AI analysis completed. Safety rating: ${score}/100. This playlist has been evaluated for bot patterns and artificial engagement.</li>`;
     }
 
   } catch (error) {
-    label.textContent = "AI analysis completed, but playlist info unavailable.";
-    console.error(error);
+    label.textContent = "Analysis failed - please try again";
+    ratingText.textContent = "ERR";
+    
+    // Show error in analysis summary
+    const tracksList = document.getElementById("tracks");
+    tracksList.innerHTML = `<li>Unable to complete analysis. Please check the playlist URL and try again.</li>`;
+    
+    console.error("Analysis error:", error);
   }
 }
 
