@@ -1,8 +1,19 @@
-// Affiliate click tracking
-function trackAffiliateClick(service) {
-    console.log('Affiliate click tracked:', service);
-    // You can add Google Analytics event tracking here later
-}
+// FAQ functionality for AEO
+document.addEventListener('DOMContentLoaded', function() {
+    // FAQ toggle functionality
+    const faqItems = document.querySelectorAll('.faq-item h3');
+    faqItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const faqItem = this.parentElement;
+            faqItem.classList.toggle('active');
+        });
+    });
+    
+    // Auto-expand first FAQ for better AEO
+    if (faqItems.length > 0) {
+        faqItems[0].parentElement.classList.add('active');
+    }
+});
 
 document.getElementById("analyzeBtn").addEventListener("click", analyzePlaylist);
 
