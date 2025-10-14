@@ -114,9 +114,9 @@ body {
   background: #000;
   color: #fff;
   min-height: 100vh;
+  padding-bottom: 80px; /* Prevents content from being hidden behind GDPR banner */
 }
 
-/* Rest of your existing styles remain exactly the same below this line */
 header {
   display: flex;
   align-items: center;
@@ -289,7 +289,7 @@ footer {
   text-align: center;
 }
 
-/* Affiliate Section Styles (keep existing) */
+/* Affiliate Section Styles */
 .affiliate-section {
   background: linear-gradient(135deg, #1a2a3a, #0d1b2a);
   padding: 30px;
@@ -407,5 +407,94 @@ footer {
   
   .affiliate-card {
     padding: 20px;
+  }
+}
+
+/* GDPR Consent Banner Styles */
+.gdpr-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #1a1a1a;
+  border-top: 2px solid #1DB954;
+  padding: 20px;
+  z-index: 10000;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+  display: none; /* Hidden by default, shown via JS */
+}
+
+.gdpr-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.gdpr-text h3 {
+  color: #1DB954;
+  margin: 0 0 8px 0;
+  font-size: 1.2rem;
+}
+
+.gdpr-text p {
+  color: #ccc;
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  max-width: 600px;
+}
+
+.gdpr-buttons {
+  display: flex;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.gdpr-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.gdpr-btn.primary {
+  background: linear-gradient(90deg, #1DB954, #22ff88);
+  color: #000;
+}
+
+.gdpr-btn.secondary {
+  background: #333;
+  color: #fff;
+  border: 1px solid #555;
+}
+
+.gdpr-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(29, 185, 84, 0.3);
+}
+
+/* Mobile Responsive for GDPR */
+@media (max-width: 768px) {
+  .gdpr-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+  
+  .gdpr-buttons {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .gdpr-btn {
+    flex: 1;
+    min-width: 120px;
   }
 }
