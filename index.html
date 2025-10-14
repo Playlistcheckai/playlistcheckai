@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PlaylistCheckAI</title>
+  <title>PlaylistCheckAI - Analyze Spotify Playlist Safety</title>
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="/favicon.png" />
@@ -11,75 +11,213 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
+  <!-- AdSense Code -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4186785765938871"
+     crossorigin="anonymous"></script>
+
   <!-- Styles -->
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header>
-    <img src="favicon.png" alt="Logo" class="logo-glow" />
-    <h1>PlaylistCheckAI</h1>
-  </header>
+  <div class="layout-container">
+    <!-- Left Sidebar Ad -->
+    <aside class="sidebar-ad left-sidebar">
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4186785765938871"
+     crossorigin="anonymous"></script>
+      <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-4186785765938871"
+          data-ad-slot="7259870550"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+      <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </aside>
 
-  <main>
-    <section class="input-section">
-      <h2>Paste your Spotify playlist link below</h2>
-      <input type="text" id="playlistInput" placeholder="https://open.spotify.com/playlist/..." />
-      <button id="analyzeBtn">Analyze Playlist</button>
-      <p class="note">PlaylistCheckAI uses AI to evaluate playlist safety patterns based on titles, artists, and content tone.</p>
-    </section>
+    <!-- Main Content -->
+    <main class="main-content">
+      <header>
+        <img src="favicon.png" alt="Logo" class="logo-glow" />
+        <h1>PlaylistCheckAI</h1>
+      </header>
 
-    <section id="results" class="hidden">
-      <div class="playlist-info">
-        <img id="coverImage" src="https://via.placeholder.com/200" alt="Playlist cover" />
-        <div class="playlist-meta">
-          <h3 id="playlistTitle">Playlist Title</h3>
-          <p id="playlistDescription">Playlist description will appear here.</p>
+      <!-- Top Banner Ad (Mobile) -->
+      <div class="mobile-ad">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4186785765938871"
+     crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-4186785765938871"
+            data-ad-slot="7259870550"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
+
+      <section class="input-section">
+        <h2>Paste your Spotify playlist link below</h2>
+        <input type="text" id="playlistInput" placeholder="https://open.spotify.com/playlist/..." />
+        <button id="analyzeBtn">Analyze Playlist</button>
+        <p class="note">PlaylistCheckAI uses AI to evaluate playlist safety patterns based on titles, artists, and content tone.</p>
+      </section>
+
+      <section id="results" class="hidden">
+        <div class="playlist-info">
+          <img id="coverImage" src="https://via.placeholder.com/200" alt="Playlist cover" />
+          <div class="playlist-meta">
+            <h3 id="playlistTitle">Playlist Title</h3>
+            <p id="playlistDescription">Playlist description will appear here.</p>
+          </div>
         </div>
-      </div>
 
-      <div class="gauge-container">
-        <div class="gauge">
-          <svg viewBox="0 0 36 36" class="circular-chart">
-            <path class="circle-bg"
-              d="M18 2.0845
-                a 15.9155 15.9155 0 0 1 0 31.831
-                a 15.9155 15.9155 0 0 1 0 -31.831"/>
-            <path id="circle" class="circle"
-              stroke-dasharray="0, 100"
-              d="M18 2.0845
-                a 15.9155 15.9155 0 0 1 0 31.831
-                a 15.9155 15.9155 0 0 1 0 -31.831"/>
-            <text id="ratingText" x="18" y="20.35" class="percentage">--</text>
-          </svg>
+        <div class="gauge-container">
+          <div class="gauge">
+            <svg viewBox="0 0 36 36" class="circular-chart">
+              <path class="circle-bg"
+                d="M18 2.0845
+                  a 15.9155 15.9155 0 0 1 0 31.831
+                  a 15.9155 15.9155 0 0 1 0 -31.831"/>
+              <path id="circle" class="circle"
+                stroke-dasharray="0, 100"
+                d="M18 2.0845
+                  a 15.9155 15.9155 0 0 1 0 31.831
+                  a 15.9155 15.9155 0 0 1 0 -31.831"/>
+              <text id="ratingText" x="18" y="20.35" class="percentage">--</text>
+            </svg>
+          </div>
+          <h3 id="ratingLabel">Awaiting Analysis...</h3>
         </div>
-        <h3 id="ratingLabel">Awaiting Analysis...</h3>
+
+        <!-- In-Article Ad -->
+        <div class="in-article-ad">
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4186785765938871"
+     crossorigin="anonymous"></script>
+          <ins class="adsbygoogle"
+              style="display:block; text-align:center;"
+              data-ad-layout="in-article"
+              data-ad-format="fluid"
+              data-ad-client="ca-pub-4186785765938871"
+              data-ad-slot="7259870550"></ins>
+          <script>
+              (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </div>
+
+        <div id="aiExplanation" class="ai-explanation">
+          <h4>🧠 How AI determined this rating</h4>
+          <ul>
+            <li>Analyzes playlist title and description for sentiment and tone</li>
+            <li>Detects explicit content indicators or repetitive/bot-like patterns</li>
+            <li>Estimates overall playlist "safety score" from 10–100</li>
+          </ul>
+          <p class="disclaimer">
+            ⚠️ This analysis is based on publicly visible Spotify playlist data. It does not reflect Spotify's internal ratings.
+          </p>
+        </div>
+
+        <div id="trackList" class="track-list">
+          <h4>🎵 AI Analysis Summary</h4>
+          <ul id="tracks">
+            <li>This section provides a brief AI summary of your playlist based on public information.</li>
+          </ul>
+        </div>
+
+        <!-- Affiliate Section -->
+        <div class="affiliate-section">
+          <h4>🎵 Protect Your Music Career</h4>
+          <p class="affiliate-subtitle">Recommended by musicians worldwide:</p>
+          
+          <div class="affiliate-grid">
+            <div class="affiliate-card">
+              <div class="affiliate-badge">Most Popular</div>
+              <h5>DistroKid</h5>
+              <p class="affiliate-desc">Get your music on Spotify, Apple Music, and 150+ stores</p>
+              <ul class="affiliate-features">
+                <li>✓ Keep 100% of your earnings</li>
+                <li>✓ Unlimited uploads</li>
+                <li>✓ Release music same-day</li>
+              </ul>
+              <a href="https://distrokid.com/vip/seven/click?campaign=playlistcheckai" 
+                 target="_blank" 
+                 class="affiliate-button">
+                Start at $19.99/year ›
+              </a>
+            </div>
+
+            <div class="affiliate-card">
+              <h5>TuneCore</h5>
+              <p class="affiliate-desc">Professional music distribution with advanced analytics</p>
+              <ul class="affiliate-features">
+                <li>✓ YouTube Revenue Collection</li>
+                <li>✓ Detailed sales reporting</li>
+                <li>✓ Social media promotion tools</li>
+              </ul>
+              <a href="https://www.tunecore.com/lp/signup_04?ref=playlistcheckai" 
+                 target="_blank" 
+                 class="affiliate-button">
+                Try TuneCore ›
+              </a>
+            </div>
+
+            <div class="affiliate-card">
+              <h5>CDBaby</h5>
+              <p class="affiliate-desc">Complete distribution + sync licensing opportunities</p>
+              <ul class="affiliate-features">
+                <li>✓ Sync licensing for TV/film</li>
+                <li>✓ Physical distribution</li>
+                <li>✓ YouTube monetization</li>
+              </ul>
+              <a href="https://www.cdbaby.com/?ref=playlistcheckai" 
+                 target="_blank" 
+                 class="affiliate-button">
+                Learn More ›
+              </a>
+            </div>
+          </div>
+          
+          <p class="affiliate-note">These services help artists distribute music properly and avoid playlist manipulation.</p>
+        </div>
+      </section>
+
+      <!-- Bottom Banner Ad -->
+      <div class="bottom-ad">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4186785765938871"
+     crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-4186785765938871"
+            data-ad-slot="7259870550"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
       </div>
 
-      <div id="aiExplanation" class="ai-explanation">
-        <h4>🧠 How AI determined this rating</h4>
-        <ul>
-          <li>Analyzes playlist title and description for sentiment and tone</li>
-          <li>Detects explicit content indicators or repetitive/bot-like patterns</li>
-          <li>Estimates overall playlist "safety score" from 10–100</li>
-        </ul>
-        <p class="disclaimer">
-          ⚠️ This analysis is based on publicly visible Spotify playlist data. It does not reflect Spotify's internal ratings.
-        </p>
-      </div>
+      <footer>
+        <p>© 2025 PlaylistCheckAI — Built with 💚 by audaCT studios</p>
+        <p class="powered">🤖 Powered by AI Analysis</p>
+      </footer>
+    </main>
 
-      <div id="trackList" class="track-list">
-        <h4>🎵 AI Analysis Summary</h4>
-        <ul id="tracks">
-          <li>This section provides a brief AI summary of your playlist based on public information.</li>
-        </ul>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <p>© 2025 PlaylistCheckAI — Built with 💚 by audaCT studios</p>
- <p class="powered">🤖 Powered by DeepSeek AI</p>
-  </footer>
+    <!-- Right Sidebar Ad -->
+    <aside class="sidebar-ad right-sidebar">
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4186785765938871"
+     crossorigin="anonymous"></script>
+      <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-4186785765938871"
+          data-ad-slot="7259870550"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+      <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </aside>
+  </div>
 
   <script src="script.js"></script>
 </body>
