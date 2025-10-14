@@ -1,5 +1,3 @@
-import OpenAI from "openai";
-
 export default async function handler(req, res) {
   try {
     const { playlistUrl } = req.query;
@@ -36,9 +34,7 @@ export default async function handler(req, res) {
     const playlistDescription =
       descMatch?.[1] || "No description available.";
 
-    // 4️⃣ Ask OpenAI for intelligent safety analysis
-    const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-
+    // 4️⃣ Ask DeepSeek for intelligent safety analysis
     const prompt = `
 You are an AI that evaluates Spotify playlists for safety and legitimacy.
 Given the title and description below, score the playlist from 10 (risky, likely bot streams or explicit themes)
@@ -50,13 +46,37 @@ Playlist title: ${playlistTitle}
 Playlist description: ${playlistDescription}
 `;
 
-    const completion = await client.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages: [{ role: "user", content: prompt }],
-      temperature: 0.7,
+    const deepseekResponse = await fetch('https://api.deepseek.com/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.DEEPSEEK_API_KEY}`
+      },
+      body: JSON.stringify({
+        model: "deepseek-chat",
+        messages: [
+          {
+            role: "system",
+            content: "You are an AI that evaluates Spotify playlists for safety and legitimacy. Always respond with valid JSON."
+          },
+          {
+            role: "user",
+            content: prompt
+          }
+        ],
+        temperature: 0.7,
+        max_tokens: 500,
+        response_format: { type: "json_object" }
+      })
     });
 
-    const text = completion.choices?.[0]?.message?.content || "";
+    if (!deepseekResponse.ok) {
+      throw new Error(`DeepSeek API error: ${deepseekResponse.status}`);
+    }
+
+    const deepseekData = await deepseekResponse.json();
+    const text = deepseekData.choices?.[0]?.message?.content || "";
+    
     let aiData = {};
     try {
       aiData = JSON.parse(text);
@@ -85,4 +105,3 @@ Playlist description: ${playlistDescription}
     });
   }
 }
-
