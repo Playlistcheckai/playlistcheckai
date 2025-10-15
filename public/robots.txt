@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://playlistcheckai.com/sitemap.xml
