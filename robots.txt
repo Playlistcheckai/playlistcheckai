@@ -1,14 +1,3 @@
 User-agent: *
 Allow: /
-Allow: /api/
-Disallow: /private/
-
 Sitemap: https://playlistcheckai.com/sitemap.xml
-
-User-agent: Googlebot
-Allow: /
-Crawl-delay: 1
-
-User-agent: Bingbot
-Allow: /
-Crawl-delay: 1
