@@ -1,58 +1,342 @@
-      <!-- Affiliate Section -->
-      <div class="affiliate-section">
-        <h4>🎵 Protect Your Music Career</h4>
-        <p class="affiliate-subtitle">Recommended by musicians worldwide:</p>
+ <!DOCTYPE html>
+<html lang="en" itemscope itemtype="https://schema.org/WebApplication">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Primary Meta Tags -->
+  <title>PlaylistCheckAI - Free Spotify Playlist Safety Analyzer | Bot Detection Tool</title>
+  <meta name="description" content="Free AI-powered tool to analyze Spotify playlists for bot activity, artificial streams, and safety ratings. Detect fake followers and ensure playlist legitimacy.">
+  <meta name="keywords" content="spotify playlist analyzer, bot detection, playlist safety, fake streams, music analytics, spotify tools">
+  <meta name="author" content="PlaylistCheckAI">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://playlistcheckai.com/">
+  <meta property="og:title" content="PlaylistCheckAI - Free Spotify Playlist Safety Analyzer">
+  <meta property="og:description" content="AI-powered tool to detect bot activity and analyze Spotify playlist safety. Get instant safety ratings and bot pattern detection.">
+  <meta property="og:image" content="https://playlistcheckai.com/og-image.png">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://playlistcheckai.com/">
+  <meta property="twitter:title" content="PlaylistCheckAI - Spotify Playlist Safety Analyzer">
+  <meta property="twitter:description" content="Free AI tool to detect bot activity and analyze Spotify playlist safety ratings.">
+  <meta property="twitter:image" content="https://playlistcheckai.com/og-image.png">
+  
+  <!-- Schema.org Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "PlaylistCheckAI",
+    "url": "https://playlistcheckai.com",
+    "description": "Free AI-powered tool to analyze Spotify playlists for bot activity and safety ratings",
+    "applicationCategory": "MusicApplication",
+    "operatingSystem": "Web Browser",
+    "permissions": "none",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "creator": {
+      "@type": "Organization",
+      "name": "audaCT studios"
+    }
+  }
+  </script>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="apple-touch-icon" href="/favicon.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4186785765938871"
+     crossorigin="anonymous"></script>
+
+  <!-- Google Consent Framework -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'analytics_storage': 'denied',
+      'personalization_storage': 'denied',
+      'functionality_storage': 'denied',
+      'security_storage': 'granted',
+      'wait_for_update': 500
+    });
+    
+    window.adsbygoogle = window.adsbygoogle || [];
+  </script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css" />
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://playlistcheckai.com" />
+</head>
+<body itemscope itemtype="https://schema.org/WebPage">
+  <!-- GDPR Consent Banner -->
+  <div id="gdpr-consent-banner" class="gdpr-banner">
+    <div class="gdpr-content">
+      <div class="gdpr-text">
+        <h3>🍪 We Value Your Privacy</h3>
+        <p>We use cookies to personalize content and ads, provide social media features, and analyze our traffic. Click "Accept All" to consent to the use of all cookies.</p>
+      </div>
+      <div class="gdpr-buttons">
+        <button id="gdpr-manage-btn" class="gdpr-btn secondary">Manage Options</button>
+        <button id="gdpr-accept-btn" class="gdpr-btn primary">Accept All</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="layout-container">
+    <!-- Left Sidebar Ad -->
+    <aside class="sidebar-ad left-sidebar">
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4186785765938871"
+     crossorigin="anonymous"></script>
+      <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-4186785765938871"
+          data-ad-slot="7259870550"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+      <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" itemprop="mainContentOfPage">
+      <header>
+        <img src="favicon.png" alt="PlaylistCheckAI Logo - Spotify Playlist Analyzer" class="logo-glow" />
+        <h1 itemprop="headline">PlaylistCheckAI</h1>
+      </header>
+
+      <!-- Mobile Top Ad -->
+      <div class="mobile-ad">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4186785765938871"
+     crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-4186785765938871"
+            data-ad-slot="7259870550"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
+
+      <section class="input-section">
+        <h2>Analyze Your Spotify Playlist Safety - Free AI Bot Detection</h2>
+        <input type="text" id="playlistInput" placeholder="https://open.spotify.com/playlist/..." aria-label="Spotify Playlist URL" />
+        <button id="analyzeBtn">Analyze Playlist Safety</button>
+        <p class="note">PlaylistCheckAI uses advanced AI to evaluate playlist safety patterns, detect bot activity, and identify artificial streams in Spotify playlists.</p>
+      </section>
+
+      <!-- FAQ Section for AEO -->
+      <section class="faq-section" itemscope itemtype="https://schema.org/FAQPage">
+        <h2>Frequently Asked Questions About Spotify Playlist Analysis</h2>
         
-        <div class="affiliate-grid">
-          <div class="affiliate-card">
-            <div class="affiliate-badge">Most Popular</div>
-            <h5>DistroKid</h5>
-            <p class="affiliate-desc">Get your music on Spotify, Apple Music, and 150+ stores</p>
-            <ul class="affiliate-features">
-              <li>✓ Keep 100% of your earnings</li>
-              <li>✓ Unlimited uploads</li>
-              <li>✓ Release music same-day</li>
-            </ul>
-            <a href="https://distrokid.com/vip/seven/click?campaign=playlistcheckai" 
-               target="_blank" 
-               class="affiliate-button"
-               onclick="trackAffiliateClick('DistroKid')">
-              Start at $19.99/year ›
-            </a>
-          </div>
-
-          <div class="affiliate-card">
-            <h5>TuneCore</h5>
-            <p class="affiliate-desc">Professional music distribution with advanced analytics</p>
-            <ul class="affiliate-features">
-              <li>✓ YouTube Revenue Collection</li>
-              <li>✓ Detailed sales reporting</li>
-              <li>✓ Social media promotion tools</li>
-            </ul>
-            <a href="https://www.tunecore.com/lp/signup_04?ref=playlistcheckai" 
-               target="_blank" 
-               class="affiliate-button"
-               onclick="trackAffiliateClick('TuneCore')">
-              Try TuneCore ›
-            </a>
-          </div>
-
-          <div class="affiliate-card">
-            <h5>CDBaby</h5>
-            <p class="affiliate-desc">Complete distribution + sync licensing opportunities</p>
-            <ul class="affiliate-features">
-              <li>✓ Sync licensing for TV/film</li>
-              <li>✓ Physical distribution</li>
-              <li>✓ YouTube monetization</li>
-            </ul>
-            <a href="https://www.cdbaby.com/?ref=playlistcheckai" 
-               target="_blank" 
-               class="affiliate-button"
-               onclick="trackAffiliateClick('CDBaby')">
-              Learn More ›
-            </a>
+        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <h3 itemprop="name">How does PlaylistCheckAI detect bot activity in Spotify playlists?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <p itemprop="text">Our AI analyzes playlist metadata, follower patterns, and engagement metrics to identify common bot indicators like artificial streaming patterns, suspicious follower growth, and automated playlist behavior.</p>
           </div>
         </div>
-        
-        <p class="affiliate-note">These services help artists distribute music properly and avoid playlist manipulation.</p>
+
+        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <h3 itemprop="name">Is PlaylistCheckAI free to use?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <p itemprop="text">Yes, our Spotify playlist analyzer is completely free. We provide instant safety ratings and bot detection without any cost or registration required.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <h3 itemprop="name">What does the safety rating mean?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <p itemprop="text">The safety rating (10-100) indicates how likely a playlist contains artificial engagement. Higher scores mean more organic, legitimate engagement while lower scores suggest potential bot activity.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <h3 itemprop="name">Can Spotify detect playlist bots?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <p itemprop="text">Yes, Spotify actively detects and removes artificial streams and bot activity. Using our tool helps you identify potentially risky playlists before Spotify takes action.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="results" class="hidden">
+        <!-- Existing results section remains the same -->
+        <div class="playlist-info">
+          <img id="coverImage" src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=300&fit=crop" alt="Spotify Playlist Cover" />
+          <div class="playlist-meta">
+            <h3 id="playlistTitle">Playlist Title</h3>
+            <p id="playlistDescription">Playlist description will appear here.</p>
+          </div>
+        </div>
+
+        <div class="gauge-container">
+          <div class="gauge">
+            <svg viewBox="0 0 36 36" class="circular-chart">
+              <path class="circle-bg"
+                d="M18 2.0845
+                  a 15.9155 15.9155 0 0 1 0 31.831
+                  a 15.9155 15.9155 0 0 1 0 -31.831"/>
+              <path id="circle" class="circle"
+                stroke-dasharray="0, 100"
+                d="M18 2.0845
+                  a 15.9155 15.9155 0 0 1 0 31.831
+                  a 15.9155 15.9155 0 0 1 0 -31.831"/>
+              <text id="ratingText" x="18" y="20.35" class="percentage">--</text>
+            </svg>
+          </div>
+          <h3 id="ratingLabel">Awaiting Analysis...</h3>
+        </div>
+
+        <!-- In-Article Ad -->
+        <div class="in-article-ad">
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4186785765938871"
+     crossorigin="anonymous"></script>
+          <ins class="adsbygoogle"
+              style="display:block; text-align:center;"
+              data-ad-layout="in-article"
+              data-ad-format="fluid"
+              data-ad-client="ca-pub-4186785765938871"
+              data-ad-slot="7259870550"></ins>
+          <script>
+              (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </div>
+
+        <div id="aiExplanation" class="ai-explanation">
+          <h4>🧠 How Our AI Detects Spotify Playlist Bots</h4>
+          <ul>
+            <li>Analyzes playlist metadata for artificial patterns</li>
+            <li>Detects bot-like engagement and streaming behavior</li>
+            <li>Identifies fake followers and artificial growth</li>
+            <li>Estimates overall playlist safety score from 10–100</li>
+          </ul>
+          <p class="disclaimer">
+            ⚠️ This analysis is based on publicly visible Spotify playlist data. It does not reflect Spotify's internal ratings.
+          </p>
+        </div>
+
+        <div id="trackList" class="track-list">
+          <h4>🎵 AI Safety Analysis Report</h4>
+          <ul id="tracks">
+            <li>This section provides a detailed AI analysis of your Spotify playlist safety and bot detection results.</li>
+          </ul>
+        </div>
+
+        <!-- Affiliate Section -->
+        <div class="affiliate-section">
+          <h4>🎵 Protect Your Music Career from Fake Streams</h4>
+          <p class="affiliate-subtitle">Trusted by musicians to distribute music legitimately:</p>
+          
+          <div class="affiliate-grid">
+            <div class="affiliate-card">
+              <div class="affiliate-badge">Most Popular</div>
+              <h5>DistroKid</h5>
+              <p class="affiliate-desc">Get your music on Spotify, Apple Music, and 150+ stores legitimately</p>
+              <ul class="affiliate-features">
+                <li>✓ Keep 100% of your earnings</li>
+                <li>✓ Unlimited uploads</li>
+                <li>✓ Release music same-day</li>
+              </ul>
+              <a href="https://distrokid.com/vip/seven/click?campaign=playlistcheckai" 
+                 target="_blank" 
+                 class="affiliate-button"
+                 onclick="trackAffiliateClick('DistroKid')">
+                Start at $19.99/year ›
+              </a>
+            </div>
+
+            <div class="affiliate-card">
+              <h5>TuneCore</h5>
+              <p class="affiliate-desc">Professional music distribution with advanced analytics</p>
+              <ul class="affiliate-features">
+                <li>✓ YouTube Revenue Collection</li>
+                <li>✓ Detailed sales reporting</li>
+                <li>✓ Social media promotion tools</li>
+              </ul>
+              <a href="https://www.tunecore.com/lp/signup_04?ref=playlistcheckai" 
+                 target="_blank" 
+                 class="affiliate-button"
+                 onclick="trackAffiliateClick('TuneCore')">
+                Try TuneCore ›
+              </a>
+            </div>
+
+            <div class="affiliate-card">
+              <h5>CDBaby</h5>
+              <p class="affiliate-desc">Complete distribution + sync licensing opportunities</p>
+              <ul class="affiliate-features">
+                <li>✓ Sync licensing for TV/film</li>
+                <li>✓ Physical distribution</li>
+                <li>✓ YouTube monetization</li>
+              </ul>
+              <a href="https://www.cdbaby.com/?ref=playlistcheckai" 
+                 target="_blank" 
+                 class="affiliate-button"
+                 onclick="trackAffiliateClick('CDBaby')">
+                Learn More ›
+              </a>
+            </div>
+          </div>
+          
+          <p class="affiliate-note">These legitimate distribution services help artists avoid playlist manipulation and fake streams.</p>
+        </div>
+      </section>
+
+      <!-- Bottom Banner Ad -->
+      <div class="bottom-ad">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4186785765938871"
+     crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-4186785765938871"
+            data-ad-slot="7259870550"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
       </div>
+
+      <footer>
+        <p>© 2025 PlaylistCheckAI — Advanced Spotify Playlist Safety Analyzer | Built with 💚 by audaCT studios</p>
+        <p class="powered">🤖 Powered by AI Analysis | Free Spotify Bot Detection Tool</p>
+      </footer>
+    </main>
+
+    <!-- Right Sidebar Ad -->
+    <aside class="sidebar-ad right-sidebar">
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4186785765938871"
+     crossorigin="anonymous"></script>
+      <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-4186785765938871"
+          data-ad-slot="7259870550"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+      <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </aside>
+  </div>
+
+  <!-- Include GDPR Consent Manager -->
+  <script src="gdpr-consent.js"></script>
+
+  <!-- Your existing script -->
+  <script src="script.js"></script>
+</body>
+</html>
