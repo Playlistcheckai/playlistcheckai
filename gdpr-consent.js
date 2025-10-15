@@ -71,6 +71,12 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     }
+    
+    // Simple affiliate tracking
+    window.trackAffiliateClick = function(service) {
+        console.log('Affiliate click tracked:', service);
+        // You can add Google Analytics event tracking here later
+    };
 });
 
 // Force ad refresh function (can be called manually if needed)
