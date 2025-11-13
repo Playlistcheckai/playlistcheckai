@@ -4,34 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PlaylistCheckAI - Free Spotify Playlist Safety Analyzer & Bot Detection</title>
- <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PlaylistCheckAI</title>
-  
-  <!-- 👇 ADD ALL THE META TAGS FROM #4 HERE -->
-  <meta name="description" content="Analyze Spotify playlists for bot activity...">
-  <meta name="keywords" content="spotify playlist analyzer...">
-  <!-- ... rest of meta tags -->
-<head>
-  <!-- Your existing meta tags -->
-  
-  <!-- 👇 ADD THE JSON-LD SCRIPT FROM #5 HERE, BEFORE </head> -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [...]
-  }
-  </script>
-  
-</head> <!-- Closing head tag -->  
-</head>
-<body>
-  <!-- Your existing content -->
-</body>
-</html> <meta name="description" content="Free AI tool to detect bot activity, fake streams, and analyze Spotify playlist safety. Get instant safety ratings and protect your music.">
+  <meta name="description" content="Free AI tool using public playlist data to detect irregularities, fake streams, and bot patterns on Spotify playlists.">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="/favicon.png" />
@@ -55,12 +28,8 @@
       'security_storage': 'granted',
       'wait_for_update': 500
     });
-    
-    // Initialize adsbygoogle
-    window.adsbygoogle = window.adsbygoogle || [];
   </script>
 
-  <!-- Styles -->
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -69,7 +38,7 @@
     <div class="gdpr-content">
       <div class="gdpr-text">
         <h3>🍪 We Value Your Privacy</h3>
-        <p>We use cookies to personalize content and ads, provide social media features, and analyze our traffic. Click "Accept All" to consent to the use of all cookies.</p>
+        <p>We use cookies to personalize content and ads, provide social media features, and analyze our traffic. Click "Accept All" to consent.</p>
       </div>
       <div class="gdpr-buttons">
         <button id="gdpr-manage-btn" class="gdpr-btn secondary">Manage Options</button>
@@ -79,57 +48,22 @@
   </div>
 
   <div class="layout-container">
-    <!-- Left Sidebar Ad -->
-    <aside class="sidebar-ad left-sidebar">
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4186785765938871"
-     crossorigin="anonymous"></script>
-      <!-- Sidebar Ad -->
-      <ins class="adsbygoogle"
-          style="display:block"
-          data-ad-client="ca-pub-4186785765938871"
-          data-ad-slot="7259870550"
-          data-ad-format="auto"
-          data-full-width-responsive="true"></ins>
-      <script>
-          (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-    </aside>
-
-    <!-- Main Content -->
     <main class="main-content">
       <header>
         <img src="favicon.png" alt="Logo" class="logo-glow" />
         <h1>PlaylistCheckAI</h1>
       </header>
 
-      <!-- Mobile Top Ad -->
-      <div class="mobile-ad">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4186785765938871"
-     crossorigin="anonymous"></script>
-        <!-- Mobile Banner -->
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-4186785765938871"
-            data-ad-slot="7259870550"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-      </div>
-
       <section class="input-section">
         <h2>Paste your Spotify playlist link below</h2>
         <input type="text" id="playlistInput" placeholder="https://open.spotify.com/playlist/..." />
         <button id="analyzeBtn">Analyze Playlist</button>
-       <p class="note">
-  PlaylistCheckAI uses public Spotify data and AI pattern detection to identify irregularities, bot-like streaming behavior, and playlist quality signals.
-</p>
+        <p class="note">Using public playlist data to detect irregularities, fake streams, and bot patterns.</p>
       </section>
 
       <section id="results" class="hidden">
         <div class="playlist-info">
-          <img id="coverImage" src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=300&fit=crop" alt="Playlist cover" />
+          <img id="coverImage" src="https://via.placeholder.com/300?text=Playlist+Cover" alt="Playlist cover" />
           <div class="playlist-meta">
             <h3 id="playlistTitle">Playlist Title</h3>
             <p id="playlistDescription">Playlist description will appear here.</p>
@@ -154,144 +88,34 @@
           <h3 id="ratingLabel">Awaiting Analysis...</h3>
         </div>
 
-        <!-- In-Article Ad -->
-        <div class="in-article-ad">
-          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4186785765938871"
-     crossorigin="anonymous"></script>
-          <!-- In-Article Ad -->
-          <ins class="adsbygoogle"
-              style="display:block; text-align:center;"
-              data-ad-layout="in-article"
-              data-ad-format="fluid"
-              data-ad-client="ca-pub-4186785765938871"
-              data-ad-slot="7259870550"></ins>
-          <script>
-              (adsbygoogle = window.adsbygoogle || []).push({});
-          </script>
-        </div>
-
         <div id="aiExplanation" class="ai-explanation">
           <h4>🧠 How AI determined this rating</h4>
           <ul>
-            <li>Analyzes playlist title and description for sentiment and tone</li>
-            <li>Detects explicit content indicators or repetitive/bot-like patterns</li>
-            <li>Estimates overall playlist "safety score" from 10–100</li>
+            <li>Analyzes playlist irregularities and engagement patterns</li>
+            <li>Detects signs of automated streams or fake plays</li>
+            <li>Estimates an overall playlist “safety score” from 10–100</li>
           </ul>
           <p class="disclaimer">
-            ⚠️ This analysis is based on publicly visible Spotify playlist data. It does not reflect Spotify's internal ratings.
+            ⚠️ Analysis is based on publicly visible Spotify playlist data only.
           </p>
         </div>
 
         <div id="trackList" class="track-list">
           <h4>🎵 AI Analysis Summary</h4>
           <ul id="tracks">
-            <li>This section provides a brief AI summary of your playlist based on public information.</li>
+            <li>This section provides a brief AI summary based on public playlist data.</li>
           </ul>
         </div>
-
-        <!-- Affiliate Section -->
-        <div class="affiliate-section">
-          <h4>🎵 Protect Your Music Career</h4>
-          <p class="affiliate-subtitle">Recommended by musicians worldwide:</p>
-          
-          <div class="affiliate-grid">
-            <div class="affiliate-card">
-              <div class="affiliate-badge">Most Popular</div>
-              <h5>DistroKid</h5>
-              <p class="affiliate-desc">Get your music on Spotify, Apple Music, and 150+ stores</p>
-              <ul class="affiliate-features">
-                <li>✓ Keep 100% of your earnings</li>
-                <li>✓ Unlimited uploads</li>
-                <li>✓ Release music same-day</li>
-              </ul>
-              <a href="https://distrokid.com/vip/seven/click?campaign=playlistcheckai" 
-                 target="_blank" 
-                 class="affiliate-button"
-                 onclick="trackAffiliateClick('DistroKid')">
-                Start at $19.99/year ›
-              </a>
-            </div>
-
-            <div class="affiliate-card">
-              <h5>TuneCore</h5>
-              <p class="affiliate-desc">Professional music distribution with advanced analytics</p>
-              <ul class="affiliate-features">
-                <li>✓ YouTube Revenue Collection</li>
-                <li>✓ Detailed sales reporting</li>
-                <li>✓ Social media promotion tools</li>
-              </ul>
-              <a href="https://www.tunecore.com/lp/signup_04?ref=playlistcheckai" 
-                 target="_blank" 
-                 class="affiliate-button"
-                 onclick="trackAffiliateClick('TuneCore')">
-                Try TuneCore ›
-              </a>
-            </div>
-
-            <div class="affiliate-card">
-              <h5>CDBaby</h5>
-              <p class="affiliate-desc">Complete distribution + sync licensing opportunities</p>
-              <ul class="affiliate-features">
-                <li>✓ Sync licensing for TV/film</li>
-                <li>✓ Physical distribution</li>
-                <li>✓ YouTube monetization</li>
-              </ul>
-              <a href="https://www.cdbaby.com/?ref=playlistcheckai" 
-                 target="_blank" 
-                 class="affiliate-button"
-                 onclick="trackAffiliateClick('CDBaby')">
-                Learn More ›
-              </a>
-            </div>
-          </div>
-          
-          <p class="affiliate-note">These services help artists distribute music properly and avoid playlist manipulation.</p>
-        </div>
       </section>
-
-      <!-- Bottom Banner Ad -->
-      <div class="bottom-ad">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4186785765938871"
-     crossorigin="anonymous"></script>
-        <!-- Bottom Banner -->
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-4186785765938871"
-            data-ad-slot="7259870550"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-      </div>
 
       <footer>
         <p>© 2025 PlaylistCheckAI — Built with 💚 by audaCT studios</p>
         <p class="powered">🤖 Powered by AI Analysis</p>
       </footer>
     </main>
-
-    <!-- Right Sidebar Ad -->
-    <aside class="sidebar-ad right-sidebar">
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4186785765938871"
-     crossorigin="anonymous"></script>
-      <!-- Sidebar Ad -->
-      <ins class="adsbygoogle"
-          style="display:block"
-          data-ad-client="ca-pub-4186785765938871"
-          data-ad-slot="7259870550"
-          data-ad-format="auto"
-          data-full-width-responsive="true"></ins>
-      <script>
-          (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-    </aside>
   </div>
 
-  <!-- Include GDPR Consent Manager -->
   <script src="gdpr-consent.js"></script>
-
-  <!-- Your existing script -->
   <script src="script.js"></script>
 </body>
 </html>
